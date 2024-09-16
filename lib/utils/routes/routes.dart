@@ -19,6 +19,21 @@ class RouteName {
   static const String inviteUserScreenPath = '/inviteUserScreenPath';
   static const String userprofileScreenPath = '/userprofileScreenPath';
   static const String jobPostedScreenPath = '/jobPostedScreenPath';
+  static const String jobCompletedScreenPath = '/jobCompletedScreenPath';
+  static const String cancelledJobScreenPath = '/cancelledJobScreenPath';
+  static const String rateEmployeeScreenPath = '/rateEmployeeScreenPath';
+  static const String disputePaymentScreenPath = '/disputePaymentScreenPath';
+  static const String ongoingJobDetailScreenPath =
+      '/ongoingJobDetailScreenPath';
+  static const String upcomingJobDetailScreenPath =
+      '/upcomingJobDetailScreenPath';
   static const String ratingAndReviewsScreenPath =
       '/ratingAndReviewsScreenPath';
+
+//professional
+  static const String pHomeScreenPath = '/pHomeScreenPath';
+  static const String pSavedJobsScreenPath = '/pSavedJobsScreenPath';
+  static const String pJobsScreenPath = '/pJobsScreenPath';
+  static const String pMessageDashboardScreenPath =
+      '/pMessageDashboardScreenPath';
 }

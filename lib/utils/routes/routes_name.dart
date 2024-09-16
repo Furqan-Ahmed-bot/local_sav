@@ -1,18 +1,27 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:local_saviors/screens/professional_screens/p_home_screen.dart';
 import 'package:local_saviors/screens/general_screens/user_role_screens/select_role_one.dart';
 import 'package:local_saviors/screens/general_screens/user_role_screens/select_role_two.dart';
+import 'package:local_saviors/screens/professional_screens/p_jobs_screen.dart';
+import 'package:local_saviors/screens/professional_screens/p_message_dashboard_screen.dart';
+import 'package:local_saviors/screens/professional_screens/p_saved_jobs_screen.dart';
 import 'package:local_saviors/screens/user_screens/best_performer_detail_screen.dart';
 import 'package:local_saviors/screens/user_screens/best_performer_screen.dart';
+import 'package:local_saviors/screens/user_screens/canceled_job_screen.dart';
+import 'package:local_saviors/screens/user_screens/dispute_payment_screen.dart';
 import 'package:local_saviors/screens/user_screens/home_screen.dart';
 import 'package:local_saviors/screens/user_screens/invite_user_screen.dart';
+import 'package:local_saviors/screens/user_screens/job_completed_screen.dart';
 import 'package:local_saviors/screens/user_screens/jobs_screen.dart';
 import 'package:local_saviors/screens/user_screens/message_dashboard_screen.dart';
 import 'package:local_saviors/screens/user_screens/notification_screen.dart';
+import 'package:local_saviors/screens/user_screens/ongoing_job_detail_screen.dart';
 import 'package:local_saviors/screens/user_screens/posted_job_screen.dart';
+import 'package:local_saviors/screens/user_screens/rate_employee_screen.dart';
 import 'package:local_saviors/screens/user_screens/rating_and_review_screen.dart';
+import 'package:local_saviors/screens/user_screens/upcoming_job_detail_screen.dart';
 import 'package:local_saviors/screens/user_screens/user_profile_screen.dart';
 import 'package:local_saviors/screens/user_screens/user_request_screen.dart';
 import 'package:local_saviors/utils/routes/screen_bindings.dart';
@@ -29,16 +38,52 @@ class AppRoutes {
           transitionDuration: Duration(milliseconds: 250),
         ),
         GetPage(
+          name: RouteName.upcomingJobDetailScreenPath,
+          page: () => UpcomingJobDetailScreen(),
+          binding: ScreenBindings(),
+          transitionDuration: Duration(milliseconds: 250),
+        ),
+        GetPage(
+          name: RouteName.ongoingJobDetailScreenPath,
+          page: () => OngoingJobDetailScreen(),
+          binding: ScreenBindings(),
+          transitionDuration: Duration(milliseconds: 250),
+        ),
+        GetPage(
+          name: RouteName.cancelledJobScreenPath,
+          page: () => CancelledJobScreen(),
+          binding: ScreenBindings(),
+          transitionDuration: Duration(milliseconds: 250),
+        ),
+        GetPage(
+          name: RouteName.rateEmployeeScreenPath,
+          page: () => RateEmployeeScreen(),
+          binding: ScreenBindings(),
+          transitionDuration: Duration(milliseconds: 250),
+        ),
+        GetPage(
+          name: RouteName.disputePaymentScreenPath,
+          page: () => DisputePaymentScreen(),
+          binding: ScreenBindings(),
+          transitionDuration: Duration(milliseconds: 250),
+        ),
+        GetPage(
+          name: RouteName.jobCompletedScreenPath,
+          page: () => JobCompletedScreen(),
+          binding: ScreenBindings(),
+          transitionDuration: Duration(milliseconds: 250),
+        ),
+        GetPage(
           name: RouteName.userprofileScreenPath,
           page: () => UserProfileScreen(),
           binding: ScreenBindings(),
           transitionDuration: Duration(milliseconds: 250),
         ),
-        GetPage(
-          name: RouteName.bottomNavBarScreenPath,
-          page: () => BottomAppBar(),
-          binding: ScreenBindings(),
-        ),
+        // GetPage(
+        //   name: RouteName.bottomNavBarScreenPath,
+        //   page: () => NavbarScreen(),
+        //   binding: ScreenBindings(),
+        // ),
         GetPage(
           name: RouteName.messagesScreenPath,
           page: () => MessageDashboardScreen(),
@@ -126,5 +171,33 @@ class AppRoutes {
         //   transitionDuration: Duration(milliseconds: 250),
         //   // transition: Transition.leftToRightWithFade,
         // ),
+
+/////professionals
+        ///
+        ///
+        GetPage(
+          name: RouteName.pHomeScreenPath,
+          page: () => PHomeScreen(),
+          binding: ScreenBindings(),
+          transitionDuration: Duration(milliseconds: 250),
+        ),
+        GetPage(
+          name: RouteName.pMessageDashboardScreenPath,
+          page: () => PMessageDashboardScreen(),
+          binding: ScreenBindings(),
+          transitionDuration: Duration(milliseconds: 250),
+        ),
+        GetPage(
+          name: RouteName.pSavedJobsScreenPath,
+          page: () => PSavedJobsScreen(),
+          binding: ScreenBindings(),
+          transitionDuration: Duration(milliseconds: 250),
+        ),
+        GetPage(
+          name: RouteName.pJobsScreenPath,
+          page: () => PJobsScreen(),
+          binding: ScreenBindings(),
+          transitionDuration: Duration(milliseconds: 250),
+        ),
       ];
 }

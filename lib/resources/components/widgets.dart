@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:local_saviors/resources/components/round_button.dart';
 import 'package:local_saviors/utils/color_utils.dart';
 import 'package:local_saviors/utils/images/image_assets.dart';
 import 'package:local_saviors/utils/routes/routes.dart';
@@ -63,7 +64,7 @@ Widget ratingReviewCard({
             ? Divider(
                 color: ColorUtils.borderColor.withOpacity(0.5),
               )
-            : SizedBox.shrink(),
+            : const SizedBox.shrink(),
         isReply
             ? Padding(
                 padding: EdgeInsets.only(left: 30.w, top: 14.h),
@@ -112,7 +113,7 @@ Widget ratingReviewCard({
                   ],
                 ),
               )
-            : SizedBox.shrink()
+            : const SizedBox.shrink()
       ],
     ),
   );
@@ -190,7 +191,7 @@ Widget userRequestCard({
                           7.w.horizontalSpace,
                           Text(
                             rating,
-                            style: TextStyle(),
+                            style: const TextStyle(),
                           )
                         ],
                       )
@@ -312,7 +313,7 @@ Widget inviteUserCard({
                         7.w.horizontalSpace,
                         Text(
                           rating,
-                          style: TextStyle(),
+                          style: const TextStyle(),
                         )
                       ],
                     )
@@ -511,7 +512,7 @@ Widget bestPerformerCard({
                           7.w.horizontalSpace,
                           Text(
                             rating,
-                            style: TextStyle(),
+                            style: const TextStyle(),
                           )
                         ],
                       )
@@ -538,9 +539,13 @@ Widget bestPerformerCard({
 
 Widget shortlistUserCard({
   required bool isVerified,
+  bool showMessageButton = true,
+  bool isJobCompleted = false,
   required String image,
   required String name,
   required String rating,
+  required context,
+  bool showSelectJobButton = true,
 }) {
   return Column(
     children: [
@@ -561,7 +566,9 @@ Widget shortlistUserCard({
             GestureDetector(
               onTap: () {
                 Get.toNamed(RouteName.bestPerformerDetailScreenPath,
-                    arguments: "Shortlist User");
+                    arguments: showSelectJobButton
+                        ? "Shortlist User"
+                        : "Employee Profile");
               },
               child: Row(
                 children: [
@@ -613,7 +620,7 @@ Widget shortlistUserCard({
                           7.w.horizontalSpace,
                           Text(
                             rating,
-                            style: TextStyle(),
+                            style: const TextStyle(),
                           )
                         ],
                       )
@@ -624,33 +631,153 @@ Widget shortlistUserCard({
             ),
             Row(
               children: [
-                Container(
-                  // width: 120.w,
-                  alignment: Alignment.center,
-                  // margin: EdgeInsets.only(right: 10.w),
-                  padding:
-                      EdgeInsets.symmetric(vertical: 10.h, horizontal: 15.w),
+                showSelectJobButton
+                    ? GestureDetector(
+                        onTap: () {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  insetPadding:
+                                      EdgeInsets.symmetric(horizontal: 20.w),
+                                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                                  backgroundColor: ColorUtils.dialogeBGColor,
+                                  content: SizedBox(
+                                    width: 1.0.sw,
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        20.h.verticalSpace,
+                                        Image.asset(
+                                          ImageAssets.jobBigIcon,
+                                          scale: 2,
+                                        ),
+                                        20.h.verticalSpace,
+                                        Text(
+                                          "Select For Job!",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: ColorUtils.black,
+                                            fontSize: 22.sp,
+                                          ),
+                                        ),
+                                        24.h.verticalSpace,
+                                        Text(
+                                          "Are you sure you want select William Roy for your job?",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: ColorUtils.black,
+                                            fontSize: 14.sp,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  actions: [
+                                    Container(
+                                      width: 1.0.sw,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Expanded(
+                                            child: Container(
+                                              alignment: Alignment.center,
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 15.h),
+                                              decoration: BoxDecoration(
+                                                  color: ColorUtils.white,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.r),
+                                                  border: Border.all(
+                                                      width: 1.w,
+                                                      color: ColorUtils
+                                                          .borderColor)),
+                                              child: const Text("Yes, Select"),
+                                            ),
+                                          ),
+                                          20.w.horizontalSpace,
+                                          Expanded(
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                Get.back();
+                                              },
+                                              child: Container(
+                                                alignment: Alignment.center,
+                                                padding: EdgeInsets.symmetric(
+                                                    vertical: 15.h),
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.r),
+                                                  color: ColorUtils.red,
+                                                ),
+                                                child: Text(
+                                                  "No",
+                                                  style: TextStyle(
+                                                      color: ColorUtils.white),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                );
+                              });
+                        },
+                        child: Container(
+                          // width: 120.w,
+                          alignment: Alignment.center,
+                          // margin: EdgeInsets.only(right: 10.w),
+                          padding: EdgeInsets.symmetric(
+                              vertical: 10.h, horizontal: 15.w),
 
-                  decoration: BoxDecoration(
-                      color: ColorUtils.red,
-                      borderRadius: BorderRadius.circular(10.sp),
-                      border: Border.all(
-                          width: 1.w, color: ColorUtils.red.withOpacity(0.5))),
-                  child: Text(
-                    "Select for job",
-                    style: TextStyle(fontSize: 14.sp, color: ColorUtils.white),
-                  ),
-                ),
-                12.w.horizontalSpace,
-                Container(
-                  padding: EdgeInsets.all(10.sp),
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle, color: ColorUtils.yellowLightBG),
-                  child: Image.asset(
-                    ImageAssets.msgIcon,
-                    scale: 2,
-                  ),
-                )
+                          decoration: BoxDecoration(
+                              color: ColorUtils.red,
+                              borderRadius: BorderRadius.circular(10.sp),
+                              border: Border.all(
+                                  width: 1.w,
+                                  color: ColorUtils.red.withOpacity(0.5))),
+                          child: Text(
+                            "Select for job",
+                            style: TextStyle(
+                                fontSize: 14.sp, color: ColorUtils.white),
+                          ),
+                        ),
+                      )
+                    : const SizedBox.shrink(),
+                showSelectJobButton
+                    ? 12.w.horizontalSpace
+                    : 0.w.horizontalSpace,
+                showMessageButton
+                    ? Container(
+                        padding: EdgeInsets.all(10.sp),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: ColorUtils.yellowLightBG),
+                        child: Image.asset(
+                          ImageAssets.msgIcon,
+                          scale: 2,
+                        ),
+                      )
+                    : isJobCompleted
+                        ? Row(
+                            children: [
+                              Image.asset(
+                                ImageAssets.greenVerifiedIcon,
+                                scale: 2,
+                              ),
+                              10.w.horizontalSpace,
+                              Text(
+                                "Job Completed",
+                                style: TextStyle(fontSize: 16.sp),
+                              )
+                            ],
+                          )
+                        : const SizedBox.shrink(),
               ],
             ),
           ],
@@ -660,7 +787,7 @@ Widget shortlistUserCard({
   );
 }
 
-Widget activeJobCard() {
+Widget activeJobCard({String status = ""}) {
   return Container(
     width: 1.0.sw,
     margin: EdgeInsets.only(bottom: 16.h),
@@ -692,12 +819,13 @@ Widget activeJobCard() {
           ],
         ),
         6.h.verticalSpace,
-        Text('Lorem ipsum dolor sit amet consectetur adipiscing elit odio.'),
-        12.h.verticalSpace,
+        const Text(
+            'Lorem ipsum dolor sit amet consectetur adipiscing elit odio.'),
+        6.h.verticalSpace,
         Divider(
           color: ColorUtils.borderColor.withOpacity(0.5),
         ),
-        12.h.verticalSpace,
+        6.h.verticalSpace,
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -780,7 +908,34 @@ Widget activeJobCard() {
               ],
             ),
           ],
-        )
+        ),
+        if (status != "")
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Divider(
+                color: ColorUtils.borderColor.withOpacity(0.5),
+              ),
+              6.h.verticalSpace,
+              Row(
+                children: [
+                  Text(
+                    "Status: ",
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 16.sp),
+                  ),
+                  Text(
+                    status,
+                    style: TextStyle(
+                        fontSize: 14.sp,
+                        color: status == "Completed"
+                            ? ColorUtils.green
+                            : ColorUtils.blue),
+                  ),
+                ],
+              )
+            ],
+          )
       ],
     ),
   );
@@ -875,6 +1030,153 @@ Widget appbar({
                   width: 80.w,
                 )
               ],
+        )
+      ],
+    ),
+  );
+}
+
+Widget applyJobCard() {
+  return Container(
+    width: 1.0.sw,
+    margin: EdgeInsets.only(bottom: 16.h),
+    padding: EdgeInsets.all(10.sp),
+    decoration: BoxDecoration(
+      color: ColorUtils.white,
+      border: Border.all(width: 1.w, color: ColorUtils.borderColor),
+      borderRadius: BorderRadius.circular(10.r),
+    ),
+    child: Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              width: 0.43.sw,
+              child: Text(
+                "Lorem ipsum dolor sit...",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16.sp,
+                    overflow: TextOverflow.ellipsis),
+              ),
+            ),
+            Text(
+              "July 20",
+              style: TextStyle(fontSize: 12.sp, color: ColorUtils.borderColor),
+            )
+          ],
+        ),
+        6.h.verticalSpace,
+        const Text(
+            'Lorem ipsum dolor sit amet consectetur adipiscing elit odio.'),
+        12.h.verticalSpace,
+        Divider(
+          color: ColorUtils.borderColor.withOpacity(0.5),
+        ),
+        // 12.h.verticalSpace,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Job Budget",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    color: ColorUtils.blue,
+                    fontSize: 12.sp,
+                  ),
+                ),
+                6.h.verticalSpace,
+                Text(
+                  "\$50.00",
+                  style: TextStyle(
+                    color: ColorUtils.black,
+                    fontSize: 16.sp,
+                  ),
+                ),
+              ],
+            ),
+            Container(
+              height: 40.h,
+              width: 1.w,
+              decoration: BoxDecoration(
+                color: ColorUtils.borderColor.withOpacity(0.5),
+              ),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Job Time",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    color: ColorUtils.blue,
+                    fontSize: 12.sp,
+                  ),
+                ),
+                6.h.verticalSpace,
+                Text(
+                  "03:00 pm",
+                  style: TextStyle(
+                    color: ColorUtils.black,
+                    fontSize: 16.sp,
+                  ),
+                ),
+              ],
+            ),
+            Container(
+              height: 40.h,
+              width: 1.w,
+              decoration: BoxDecoration(
+                color: ColorUtils.borderColor.withOpacity(0.5),
+              ),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Job Date",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    color: ColorUtils.blue,
+                    fontSize: 12.sp,
+                  ),
+                ),
+                6.h.verticalSpace,
+                Text(
+                  "May 18, 2024",
+                  style: TextStyle(
+                    color: ColorUtils.black,
+                    fontSize: 16.sp,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+        Divider(
+          color: ColorUtils.borderColor.withOpacity(0.5),
+        ),
+        // 10.verticalSpace,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Image.asset(
+              ImageAssets.saveIcon,
+              scale: 2,
+            ),
+            RoundButton(
+              title: "Apply Job",
+              onPress: () {},
+              // horizonalPad: 20.w,
+              width: 150.w,
+              buttonColor: ColorUtils.red,
+            )
+          ],
         )
       ],
     ),

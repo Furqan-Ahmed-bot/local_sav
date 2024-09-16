@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 
-class JobsScreenController extends GetxController {
+class PJobsController extends GetxController {
   RxInt selectedIndex = 0.obs;
   List<String> names = [
-    "Open",
+    "Applied",
     "Upcoming",
     "Ongoing",
     "Completed",
