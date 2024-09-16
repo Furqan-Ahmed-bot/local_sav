@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, unrelated_type_equality_checks, avoid_unnecessary_containers, use_key_in_widget_constructors, prefer_const_constructors_in_immutables
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, unrelated_type_equality_checks, avoid_unnecessary_containers, use_key_in_widget_constructors, prefer_const_constructors_in_immutables, use_full_hex_values_for_flutter_colors
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,6 +10,7 @@ import 'package:local_saviors/screens/user_screens/message_dashboard_screen.dart
 import 'package:local_saviors/screens/user_screens/user_profile_screen.dart';
 import 'package:local_saviors/utils/images/image_assets.dart';
 import 'package:local_saviors/utils/routes/routes.dart';
+import '../../screens/general_screens/user_role_screens/select_role_one.dart';
 import '../../utils/color_utils.dart';
 
 class NavbarScreen extends StatefulWidget {
@@ -216,19 +217,33 @@ class _NavbarScreenState extends State<NavbarScreen> {
                                 ],
                               ),
                             ),
-                            GestureDetector(
+                            60.verticalSpace,
+                            InkWell(
                               onTap: () {
-                                // logOutDialog(context);
+                                Get.to(() {
+                                  Get.offAll(SelectUserRoleOne());
+                                });
                               },
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "Logout",
-                                    style: TextStyle(color: Colors.black),
-                                  )
-                                ],
-                              ),
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                    color: ColorUtils.red,
+                                    border: Border.all(
+                                        width: 1.5, color: ColorUtils.red),
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(15.r),
+                                        bottomRight: Radius.circular(15.r)),
+                                  ),
+                                  width: 0.55.sw,
+                                  height: 0.08.sh,
+                                  child: Center(
+                                    child: Text(
+                                      'Logout',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  )),
                             ),
                             20.verticalSpace,
                           ],
@@ -476,7 +491,7 @@ class _NavbarScreenState extends State<NavbarScreen> {
   buildMyNavBar2(BuildContext context) {
     return Container(
       //height: 100.h,
-      color: Colors.transparent,
+      color: Colors.white,
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Stack(

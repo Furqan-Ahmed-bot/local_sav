@@ -13,6 +13,7 @@ import 'package:local_saviors/screens/user_screens/message_dashboard_screen.dart
 import 'package:local_saviors/screens/user_screens/user_profile_screen.dart';
 import 'package:local_saviors/utils/images/image_assets.dart';
 import 'package:local_saviors/utils/routes/routes.dart';
+import '../../screens/general_screens/user_role_screens/select_role_one.dart';
 import '../../utils/color_utils.dart';
 
 class PBottomNavBar extends StatefulWidget {
@@ -219,19 +220,33 @@ class _PBottomNavBarState extends State<PBottomNavBar> {
                                 ],
                               ),
                             ),
-                            GestureDetector(
+                            60.verticalSpace,
+                            InkWell(
                               onTap: () {
-                                // logOutDialog(context);
+                                Get.to(() {
+                                  Get.offAll(SelectUserRoleOne());
+                                });
                               },
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "Logout",
-                                    style: TextStyle(color: Colors.black),
-                                  )
-                                ],
-                              ),
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                    color: ColorUtils.red,
+                                    border: Border.all(
+                                        width: 1.5, color: ColorUtils.red),
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(15.r),
+                                        bottomRight: Radius.circular(15.r)),
+                                  ),
+                                  width: 0.55.sw,
+                                  height: 0.08.sh,
+                                  child: Center(
+                                    child: Text(
+                                      'Logout',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  )),
                             ),
                             20.verticalSpace,
                           ],
